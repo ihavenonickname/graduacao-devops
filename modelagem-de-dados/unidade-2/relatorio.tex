@@ -1,0 +1,179 @@
+\documentclass[12pt,a4paper]{article}
+
+\input{../../template.tex}
+
+\begin{document}
+
+\montarinicio
+    {ELEMENTOS DO MODELO ENTIDADE-RELACIONEMENTO}
+    {Modelagem de Dados}
+    {Mariana Karina Miglionari De Souza}
+
+% =========================
+% SEÇÃO: IDENTIFICAÇÃO DE ELEMENTOS EM DER
+% =========================
+\section{Sistema de Biblioteca: Identificação de Elementos em DER}
+
+\subsection{Entidades identificadas}
+\begin{itemize}
+\item Livro
+\item Leitor
+\item Empréstimo
+\end{itemize}
+
+\subsection{Atributos da entidade LIVRO}
+\begin{itemize}
+\item ISBN
+\item Título
+\item Autor
+\item Ano de publicação
+\end{itemize}
+
+\subsection{Chave primária de LIVRO e justificativa}
+
+A chave primária é o \textbf{ISBN}, pois é um atributo único para cada livro no domínio, garantindo a identificação unívoca de cada instância da entidade Livro.
+
+\subsection{Atributo composto em LEITOR}
+
+O atributo composto é \textbf{Endereço}, que pode ser decomposto em:
+\begin{itemize}
+\item Rua
+\item Número
+\item Bairro
+\item Cidade
+\item CEP
+\end{itemize}
+
+\subsection{Relacionamentos e cardinalidades}
+
+\begin{itemize}
+\item LEITOR -- EMPRÉSTIMO: \textbf{1 : N}
+\begin{itemize}
+\item Um leitor pode realizar vários empréstimos
+\item Cada empréstimo pertence a um único leitor
+\end{itemize}
+
+\item LIVRO -- EMPRÉSTIMO: \textbf{1 : N}
+\begin{itemize}
+\item Um livro pode estar associado a vários empréstimos
+\item Cada empréstimo refere-se a um único livro
+\end{itemize}
+\end{itemize}
+
+\subsection{Chaves estrangeiras na entidade EMPRÉSTIMO}
+
+\begin{itemize}
+\item Matrícula do Leitor (referência à entidade Leitor)
+\item ISBN do Livro (referência à entidade Livro)
+\end{itemize}
+
+% =========================
+% SEÇÃO: DESENHO DO DER
+% =========================
+\section{Sistema de Clínica Médica: Desenho do DER}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[node distance=3cm]
+
+% ENTIDADES (retângulos)
+\node (consulta) [draw, diamond] {Consulta};
+\node (paciente) [draw, rectangle, left of=consulta, xshift=-2cm] {Paciente};
+\node (medico) [draw, rectangle, right of=consulta, xshift=2cm] {Médico};
+
+% ATRIBUTOS PACIENTE
+\node (cpf) [draw, ellipse, above of=paciente] {\underline{CPF}};
+\node (nomeP) [draw, ellipse, above left of=paciente] {Nome};
+\node (telP) [draw, ellipse, double, above right of=paciente] {Telefone};
+\node (dataNasc) [draw, ellipse, below of=paciente] {\shortstack{Data de\\nascimento}};
+
+% ATRIBUTOS MÉDICO
+\node (crm) [draw, ellipse, above of=medico] {\underline{CRM}};
+\node (nomeM) [draw, ellipse, above right of=medico] {Nome};
+\node (telM) [draw, ellipse, above left of=medico] {Telefone};
+\node (esp) [draw, ellipse, below of=medico] {Especialidade};
+
+% ATRIBUTOS CONSULTA
+\node (data) [draw, rectangle, below left of=consulta] {Data};
+\node (valor) [draw, rectangle, below of=consulta] {Valor};
+\node (horario) [draw, rectangle, below right of=consulta] {Horário};
+
+% LIGAÇÕES PACIENTE
+\draw (paciente) -- (cpf);
+\draw (paciente) -- (nomeP);
+\draw (paciente) -- (dataNasc);
+\draw (paciente) -- (telP);
+
+% LIGAÇÕES MÉDICO
+\draw (medico) -- (crm);
+\draw (medico) -- (nomeM);
+\draw (medico) -- (esp);
+\draw (medico) -- (telM);
+
+% LIGAÇÕES CONSULTA
+\draw[dashed] (consulta) -- (data);
+\draw[dashed] (consulta) -- (valor);
+\draw[dashed] (consulta) -- (horario);
+
+% RELACIONAMENTOS
+\draw (paciente) -- node[midway, fill=white]{(1,N)} (consulta);
+\draw (medico) -- node[midway, fill=white]{(1,N)} (consulta);
+
+\end{tikzpicture}
+\end{figure}
+
+\subsection{Entidades identificadas}
+
+Foram identificadas \textbf{3 entidades} no cenário:
+
+\begin{itemize}
+\item Paciente
+\item Médico
+\item Consulta
+\end{itemize}
+
+\subsection{Cardinalidade do relacionamento MÉDICO--CONSULTA}
+
+O relacionamento entre MÉDICO e CONSULTA é \textbf{1 : N}, pois:
+
+\begin{itemize}
+\item Um médico pode realizar várias consultas
+\item Cada consulta é realizada por um único médico
+\end{itemize}
+
+\subsection{Atributo multivalorado em PACIENTE (telefone)}
+
+O atributo \textbf{telefone} é multivalorado porque:
+
+\begin{itemize}
+\item Um paciente pode possuir mais de um número de telefone
+\item Não há limitação de unicidade para esse atributo no domínio
+\item Portanto, o atributo não é atômico, podendo assumir múltiplos valores para uma mesma instância de paciente
+\end{itemize}
+
+% =========================
+% SEÇÃO: INTEGRIDADE REFERENCIAL
+% =========================
+\section{Sistema de Vendas: Integridade referencial}
+
+\subsection{Violação de integridade referencial na tabela PEDIDO}
+
+Sim, há violação de integridade referencial. O pedido de número \textbf{1003} contém o valor \textbf{CPF\_cliente = 444.444.444-44}, porém este CPF não existe na tabela \textbf{CLIENTE}. Portanto, trata-se de uma chave estrangeira sem referência válida.
+
+\subsection{Uso de CPF\_cliente nulo no pedido 1004}
+
+A existência de \textbf{CPF\_cliente = NULL} no pedido 1004 só é permitida se a chave estrangeira tiver sido definida sem restrição de obrigatoriedade (NOT NULL). No modelo relacional, o valor NULL em uma chave estrangeira significa que o relacionamento entre as tabelas não está estabelecido para aquele registro específico. Isso implica que o pedido existe independentemente da associação imediata com um cliente válido. Entretanto, do ponto de vista de modelagem de domínio, isso é incomum, pois um pedido normalmente é um objeto dependente de um cliente. Assim, em um modelo bem estruturado, o atributo CPF\_cliente geralmente deveria ser obrigatório, tornando o uso de NULL semanticamente questionável.
+
+\subsection{Exclusão do cliente com CPF 111.111.111-11}
+
+O CPF do cliente está sendo referenciado como chave estrangeira na tabela PEDIDO (pedido 1001). Assim, a exclusão violaria a integridade referencial. Portanto, a alternativa correta é:
+
+\textbf{Não pode excluir pois há pedidos deste cliente}
+
+\subsection{Regra de integridade referencial para exclusão automática de pedidos}
+
+Para garante que, ao excluir um cliente, todos os pedidos associados a ele sejam automaticamente removidos, mantendo a consistência do banco de dados, a regra de integridade referencial que devemos usar é:
+
+\textbf{ON DELETE CASCADE}
+
+\end{document}

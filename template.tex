@@ -1,0 +1,80 @@
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{listings}
+\usepackage{listingsutf8}
+\usepackage{xcolor}
+\usepackage{setspace}
+\usepackage{float}
+\usepackage{tikz}
+
+\usetikzlibrary{positioning, shapes.geometric}
+\onehalfspacing
+\geometry{margin=2.5cm}
+
+\lstset{
+    language=SQL,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{red},
+    breaklines=true,
+    showstringspaces=false
+}
+
+\newcommand{\montarinicio}[3]{
+    % =========================
+    % CAPA
+    % =========================
+    \begin{titlepage}
+        \centering
+
+        {\large Faculdade Anhanguera}\\[0.5cm]
+        {\large Tecnólogo em DevOps}\\[3cm]
+
+        {\Large \textbf{#1}}\\[2cm]
+
+        {\large Gabriel Blank Stift Mousquer}\\[1cm]
+
+        {\large Ivoti/RS}\\
+        {\large 2026}
+
+    \end{titlepage}
+
+    % =========================
+    % FOLHA DE ROSTO
+    % =========================
+    \begin{titlepage}
+        \centering
+
+        {\large Faculdade Anhanguera}\\[0.5cm]
+        {\large Tecnólogo em DevOps}\\[2cm]
+
+        {\Large \textbf{#1}}\\[1.5cm]
+
+        \begin{flushright}
+            Trabalho apresentado à disciplina de \\
+            \textbf{#2} \\
+            Professor: #3 \\
+        \end{flushright}
+
+        \vfill
+
+        {\large Gabriel Blank Stift Mousquer}\\
+        Matrícula: 2024201126\\
+
+        \vfill
+
+        {\large Ivoti/RS}\\
+        {\large 2026}
+
+    \end{titlepage}
+
+    % =========================
+    % SEÇÃO: TOC
+    % =========================
+    \tableofcontents
+    \newpage
+}
