@@ -6,10 +6,10 @@ PDF := $(TEX:.tex=.pdf)
 all: $(PDF)
 
 $(PDF): %.pdf: %.tex template.tex
-	latexmk -pdf -cd -r $(CURDIR)/.latexmkrc $<
+	latexmk -pdf -cd $<
 	cp $(dir $<)build/$(notdir $@) $(dir $<)
 
 clean:
 	for f in $(TEX); do \
-		latexmk -C -cd -r $(CURDIR)/.latexmkrc $$f; \
+		latexmk -C -cd $$f; \
 	done
