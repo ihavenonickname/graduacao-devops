@@ -83,7 +83,7 @@ Legenda:
 | Disciplina                           | Trabalhos | Prova | Pontos |
 |:------------------------------------:|:---------:|:-----:|:------:|
 | ENGENHARIA DE SOFTWARE               | 0         | 23/05 | 50     |
+| ALGORITMOS E PROGRAMAÇÃO ESTRUTURADA | 4         | 23/05 | 16     |
+| ANÁLISE E MODELAGEM DE SISTEMAS      | 2         | 23/05 | 0      |
 | LÓGICA E MATEMÁTICA COMPUTACIONAL    | 1         | 23/05 | 0      |
 | REDES E SISTEMAS DISTRIBUÍDOS        | 1         | 23/05 | 0      |
-| ANÁLISE E MODELAGEM DE SISTEMAS      | 2         | 23/05 | 0      |
-| ALGORITMOS E PROGRAMAÇÃO ESTRUTURADA | 4         | 23/05 | 0      |

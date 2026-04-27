@@ -1,0 +1,74 @@
+\documentclass[12pt,a4paper]{article}
+
+\input{../../template.tex}
+
+\begin{document}
+
+\montarinicio
+    {VETORES, MATRIZES, STRUCTS E PONTEIROS}
+    {Algoritmos e Programação Estruturada}
+    {Anderson Emídio De Macedo Gonçalves}
+
+\section{Codificação completa}
+
+O código-fonte desenvolvido em linguagem C é apresentado a seguir.
+
+\lstset{language=C}
+
+\lstinputlisting[
+    caption={Código em C},
+    inputencoding=utf8/latin1,
+    basicstyle=\ttfamily\scriptsize
+]{./static/main.c}
+
+\newpage
+
+\section{Explicação do algoritmo}
+
+O programa tem como objetivo armazenar 5 valores inteiros em um vetor, calcular a soma desses valores e exibi-los individualmente junto com o resultado final.
+
+Inicialmente, é definida a constante \texttt{qtde\_elementos} com valor 5, que determina o tamanho do vetor. Em seguida, é declarado o vetor \texttt{vetor} com essa quantidade de posições e a variável \texttt{soma}, inicializada com zero para armazenar o total acumulado.
+
+O primeiro laço \texttt{for} é responsável pela leitura dos valores. A cada iteração, o programa solicita ao usuário um número inteiro e o armazena na posição correspondente do vetor. A leitura é feita utilizando \texttt{scanf} com aritmética de ponteiros (\texttt{vetor+i}), que equivale a acessar o endereço da posição \texttt{i} do vetor. Após a leitura, o valor é imediatamente somado à variável \texttt{soma}.
+
+O segundo laço \texttt{for} percorre o vetor novamente, exibindo cada elemento armazenado no formato \texttt{vetor[i] = valor}, garantindo que todos os valores inseridos sejam apresentados individualmente.
+
+Ao final, o programa exibe o valor total armazenado na variável \texttt{soma}, que corresponde à soma de todos os elementos do vetor.
+
+A implementação garante que:
+\begin{itemize}
+    \item O vetor armazene corretamente 5 valores inteiros;
+    \item Os valores sejam inseridos e acessados sem erros;
+    \item A soma seja calculada durante a leitura dos dados;
+    \item Todos os elementos do vetor sejam exibidos individualmente;
+    \item O resultado final da soma seja apresentado corretamente.
+\end{itemize}
+
+\newpage
+
+\section{Execução do código}
+
+Foram realizados testes com diferentes conjuntos de valores para validar o funcionamento do programa.
+
+\subsection{Caso 1: 4, 3, 2, 1, 1}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./static/img-1.png}
+\end{figure}
+
+\subsection{Caso 1: 40, 30, 20, 10, 10}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./static/img-2.png}
+\end{figure}
+
+\subsection{Caso 1: 1, -3, 2, -5, 6}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./static/img-3.png}
+\end{figure}
+
+\end{document}
