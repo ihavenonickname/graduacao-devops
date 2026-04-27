@@ -1,0 +1,75 @@
+\documentclass[12pt,a4paper]{article}
+
+\input{../../template.tex}
+
+\begin{document}
+
+\montarinicio
+    {ESTRUTURAS DE CONTROLE E REPETIÇÃO}
+    {Algoritmos e Programação Estruturada}
+    {Anderson Emídio De Macedo Gonçalves}
+
+\section{Codificação completa}
+
+O código-fonte desenvolvido em linguagem C é apresentado a seguir.
+
+\lstset{language=C}
+
+\lstinputlisting[
+    caption={Código em C},
+    inputencoding=utf8/latin1,
+    basicstyle=\ttfamily\scriptsize
+]{./static/main.c}
+
+\newpage
+
+\section{Explicação do algoritmo}
+
+O programa tem como objetivo ler números inteiros informados pelo usuário e calcular a soma desses valores até que seja inserido o número zero, utilizado como valor sentinela para encerrar o loop.
+
+Inicialmente, são declaradas duas variáveis inteiras: \texttt{soma}, inicializada com zero, responsável por armazenar o total acumulado, e \texttt{valor}, inicializada com 1 para garantir que a condição do laço seja verdadeira na primeira verificação.
+
+A estrutura de repetição utilizada é o laço \texttt{while}, que realiza o teste da condição antes de executar o bloco de código. A condição definida é \texttt{valor != 0}, ou seja, o loop continuará executando enquanto o valor informado pelo usuário for diferente de zero.
+
+Dentro do laço, o programa solicita ao usuário a entrada de um número inteiro, que é armazenado na variável \texttt{valor}. Em seguida, esse valor é somado à variável \texttt{soma}, acumulando o resultado a cada iteração.
+
+Quando o usuário insere o valor zero, a condição do \texttt{while} se torna falsa na próxima verificação, encerrando o loop. O valor zero também é somado, porém não altera o resultado final.
+
+Após o término do laço, o programa exibe o valor total da soma acumulada.
+
+A implementação garante que:
+\begin{itemize}
+    \item O laço execute com teste de condição no início, conforme proposto;
+    \item O usuário possa inserir múltiplos valores;
+    \item O loop seja encerrado corretamente com o valor sentinela;
+    \item A soma final seja exibida corretamente.
+\end{itemize}
+
+\newpage
+
+\section{Execução do código}
+
+Foram realizados testes com diferentes conjuntos de valores para validar o funcionamento do programa.
+
+\subsection{Caso 1: 4, 3, 2, 1, 0}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./static/img-1.png}
+\end{figure}
+
+\subsection{Caso 2: 0}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./static/img-2.png}
+\end{figure}
+
+\subsection{Caso 3: 5, 4, -15, 0}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./static/img-3.png}
+\end{figure}
+
+\end{document}
