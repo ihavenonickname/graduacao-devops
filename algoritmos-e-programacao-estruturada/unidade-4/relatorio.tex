@@ -1,0 +1,77 @@
+\documentclass[12pt,a4paper]{article}
+
+\input{../../template.tex}
+
+\begin{document}
+
+\montarinicio
+    {ALGORITMOS E PROGRAMAÇÃO ESTRUTURADA}
+    {Algoritmos e Programação Estruturada}
+    {Anderson Emídio De Macedo Gonçalves}
+
+\section{Codificação completa}
+
+O código-fonte desenvolvido em linguagem C é apresentado a seguir.
+
+\lstset{language=C}
+
+\lstinputlisting[
+    caption={Código em C},
+    inputencoding=utf8/latin1,
+    basicstyle=\ttfamily\scriptsize
+]{./static/main.c}
+
+\newpage
+
+\section{Explicação do algoritmo}
+
+O programa tem como objetivo calcular o salário de um profissional que trabalha por hora, a partir do valor da hora trabalhada e da quantidade de horas trabalhadas no mês, considerando o cálculo do salário bruto, do desconto de 9\% e do salário líquido.
+
+Inicialmente, o programa solicita ao usuário o valor da hora de trabalho (\texttt{valor\_hora}) e a quantidade de horas trabalhadas no mês (\texttt{qtde\_horas}). Esses dados são utilizados como entrada para os cálculos posteriores.
+
+Em seguida, o cálculo do salário bruto é realizado pela função \texttt{calcular\_salario\_bruto()}, que recebe como parâmetros o valor da hora e a quantidade de horas trabalhadas. Essa função retorna o produto entre esses dois valores, resultando no salário bruto do profissional.
+
+Com o salário bruto calculado, o programa chama a função \texttt{calcular\_desconto()}, que recebe o salário bruto como parâmetro e aplica uma taxa fixa de 9\%, definida pela constante \texttt{aliquota\_desconto}. O resultado dessa função corresponde ao valor do desconto aplicado sobre o salário.
+
+Por fim, o salário líquido é calculado pela função \texttt{calcular\_salario\_liquido()}, que recebe o salário bruto e o valor do desconto como parâmetros. Essa função realiza a subtração entre o salário bruto e o desconto, resultando no valor final a ser recebido pelo profissional.
+
+Após a realização dos cálculos, o programa exibe na tela o salário bruto, o valor do desconto e o salário líquido, todos formatados com duas casas decimais.
+
+A implementação garante que:
+\begin{itemize}
+    \item O programa leia corretamente o valor da hora e a quantidade de horas trabalhadas;
+    \item O salário bruto seja calculado corretamente a partir da multiplicação dos valores de entrada;
+    \item O desconto de 9\% seja aplicado corretamente sobre o salário bruto;
+    \item O salário líquido seja obtido corretamente pela subtração do desconto;
+    \item Os três valores finais sejam exibidos de forma clara ao usuário;
+    \item O programa utilize funções separadas para cada etapa do cálculo, garantindo modularização.
+\end{itemize}
+
+\newpage
+
+\section{Execução do código}
+
+Foram realizados testes com diferentes conjuntos de valores para validar o funcionamento do programa.
+
+\subsection{Caso 1: Valores redondos}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./static/img-1.png}
+\end{figure}
+
+\subsection{Caso 1: Valor da hora decimal}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./static/img-2.png}
+\end{figure}
+
+\subsection{Caso 1: Quantidade de horas decimal}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./static/img-3.png}
+\end{figure}
+
+\end{document}
