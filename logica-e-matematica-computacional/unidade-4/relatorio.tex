@@ -1,0 +1,289 @@
+\documentclass[12pt,a4paper]{article}
+
+\input{../../template.tex}
+
+\begin{document}
+
+\montarinicio
+    {PROPOSIÇÕES LÓGICAS}
+    {Lógica e Matemática Computacional}
+    {Adriane Aparecida Loper}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SEÇÃO: TABELAS VERDADE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Tabelas Verdade}
+
+Nesta seção, são apresentadas as tabelas-verdade das operações lógicas fundamentais: conjunção, disjunção e negação. Para cada uma delas, são exibidos também seus respectivos circuitos lógicos e uma implementação na sintaxe do Python. A combinação desses operadores permite a construção de portas lógicas como \textbf{NAND} e \textbf{NOR}, consideradas fundamentais por serem funcionalmente completas, isto é, capazes de representar qualquer função lógica e, portanto, implementar qualquer circuito digital.
+
+\subsection{Conjunção}
+
+A conjunção ($P \land Q$) é uma operação lógica que resulta em verdadeiro apenas quando ambas as proposições são verdadeiras simultaneamente. Em eletrônica digital, é implementada pela porta AND. Além de sua interpretação lógica, é amplamente utilizada na programação em operações bit a bit (bitwise), especialmente em máscaras de bits, onde permite selecionar ou verificar estados específicos em representações binárias.
+
+\begin{figure}[h]
+\centering
+\begin{minipage}{0.30\textwidth}
+    \centering
+    \[
+    \begin{array}{c|c|c}
+        P & Q & P \land Q \\
+        \hline
+        V & V & V \\
+        V & F & F \\
+        F & V & F \\
+        F & F & F \\
+    \end{array}
+    \]
+\end{minipage}
+\begin{minipage}{0.30\textwidth}
+    \centering
+    \begin{circuitikz}
+        \draw
+        (2,0.5) node[and port] (and1) {}
+
+        (0,1) node[left]{P} -- (and1.in 1)
+        (0,0) node[left]{Q} -- (and1.in 2)
+
+        (and1.out) -- (2.5,0.5) node[right]{Saída};
+    \end{circuitikz}
+\end{minipage}
+\begin{minipage}{0.35\textwidth}
+    \centering
+    \begin{lstlisting}[language=Python, breaklines=true, columns=fullflexible, basicstyle=\ttfamily\small]
+    def conjuncao(P, Q):
+        return P and Q
+    \end{lstlisting}
+\end{minipage}
+\caption{Operação de conjunção em tabela-verdade, circuito lógico e linguagem Python}
+\end{figure}
+
+\subsection{Disjunção}
+
+A disjunção ($P \lor Q$) é uma operação lógica que resulta em verdadeiro quando pelo menos uma das proposições é verdadeira. Em eletrônica digital, é implementada pela porta OR. Na programação, também aparece em operações bit a bit (bitwise), sendo utilizada para combinar ou ativar bits específicos em representações binárias, como em máscaras de controle e manipulação de flags.
+
+\begin{figure}[h]
+\centering
+\begin{minipage}{0.30\textwidth}
+    \centering
+    \[
+    \begin{array}{c|c|c}
+        R & S & R \lor S \\
+        \hline
+        V & V & V \\
+        V & F & V \\
+        F & V & V \\
+        F & F & F \\
+    \end{array}
+    \]
+\end{minipage}
+\begin{minipage}{0.30\textwidth}
+    \centering
+    \begin{circuitikz}
+        \draw
+        (2,0.5) node[or port] (or1) {}
+
+        (0,1) node[left]{P} -- (or1.in 1)
+        (0,0) node[left]{Q} -- (or1.in 2)
+
+        (or1.out) -- (2.5,0.5) node[right]{Saída};
+    \end{circuitikz}
+\end{minipage}
+\begin{minipage}{0.35\textwidth}
+    \centering
+    \begin{lstlisting}[language=Python, breaklines=true, columns=fullflexible, basicstyle=\ttfamily\small]
+    def disjuncao(R, S):
+        return R or S
+    \end{lstlisting}
+\end{minipage}
+\caption{Operação de disjunção em tabela-verdade, circuito lógico e linguagem Python}
+\end{figure}
+
+\subsection{Negação}
+
+A negação ($\neg P$) é uma operação lógica que inverte o valor de verdade de uma proposição, transformando verdadeiro em falso e vice-versa. Em eletrônica digital, é implementada pela porta NOT, sendo fundamental na construção de circuitos lógicos mais complexos e na aplicação de transformações algébricas. Na programação, também está presente em operações bit a bit (bitwise), onde inverte os bits de uma representação binária.
+
+\begin{figure}[h]
+\centering
+\begin{minipage}{0.30\textwidth}
+    \[
+    \begin{array}{c|c}
+        T & \neg T \\
+        \hline
+        V & F \\
+        F & V \\
+    \end{array}
+    \]
+\end{minipage}
+\begin{minipage}{0.30\textwidth}
+    \centering
+    \begin{circuitikz}
+        \draw
+        (0,0) node[left]{T} -- (1,0)
+        (1.5,0) node[not port] (not1) {}
+        (not1.in) -- (1,0)
+        (not1.out) -- (2.5,0) node[right]{Saída};
+    \end{circuitikz}
+\end{minipage}
+\begin{minipage}{0.35\textwidth}
+    \centering
+    \begin{lstlisting}[language=Python, breaklines=true, columns=fullflexible, basicstyle=\ttfamily\small]
+    def negacao(T):
+        return not T
+    \end{lstlisting}
+\end{minipage}
+\caption{Operação de negação em tabela-verdade, circuito lógico e linguagem Python}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SEÇÃO: LEIS DE DE MORGAN
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Leis de De Morgan}
+
+Nesta seção, são apresentadas as Leis de De Morgan, que descrevem como a negação de proposições compostas afeta os operadores lógicos. Essas leis estabelecem que a negação de uma conjunção equivale à disjunção das negações, e vice-versa. Além de seu papel teórico na lógica proposicional, elas são fundamentais na eletrônica digital, pois permitem a transformação e simplificação de circuitos, especialmente no uso de portas \textbf{NAND} e \textbf{NOR}.
+
+\begin{table}[h]
+\centering
+\[
+\begin{array}{c|c|c|c}
+U & V & \neg(U \land V) & \neg U \lor \neg V \\
+\hline
+V & V & F & F \\
+V & F & V & V \\
+F & V & V & V \\
+F & F & V & V \\
+\end{array}
+\]
+\caption{Tabela verdade das leis de De Morgan}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\begin{circuitikz}
+
+% =========================
+% ESQUERDA: ¬(U ∧ V)
+% =========================
+
+% entradas
+\node (U1) at (0,2) {U};
+\node (V1) at (0,0) {V};
+
+% AND
+\node[and port] (AND1) at (2,1) {};
+
+% conexões AND
+\draw (U1) -- (AND1.in 1);
+\draw (V1) -- (AND1.in 2);
+
+% NOT
+\node[not port] (NOT1) at (3,1) {};
+
+\draw (AND1.out) -- (NOT1.in);
+
+% saída
+\draw (NOT1.out) -- (4,1) node[right] {Saída};
+
+% =========================
+% SEPARAÇÃO
+% =========================
+
+\draw[dashed] (6,3) -- (6,-2);
+
+% =========================
+% DIREITA: ¬U ∨ ¬V
+% =========================
+
+% entradas
+\node (U2) at (7,2) {U};
+\node (V2) at (7,0) {V};
+
+% NOTs
+\node[not port] (NOTU) at (8,2) {};
+\node[not port] (NOTV) at (8,0) {};
+
+\draw (U2) -- (NOTU.in);
+\draw (V2) -- (NOTV.in);
+
+% OR
+\node[or port] (OR1) at (10.5,1) {};
+
+\draw (NOTU.out) -- (OR1.in 1);
+\draw (NOTV.out) -- (OR1.in 2);
+
+% saída
+\draw (OR1.out) -- (11,1) node[right] {Saída};
+
+\end{circuitikz}
+\caption{Circuitos lógicos equivalentes pelas leis de De Morgan}
+\end{figure}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SEÇÃO: TAUTOLOGIA, CONTRADIÇÃO E CONTINGÊNCIA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Tautologia, Contradição e Contingência}
+
+Nesta seção, são analisadas proposições compostas com o objetivo de classificá-las como tautologia, contradição ou contingência. Para isso, são construídas tabelas-verdade que permitem verificar o comportamento lógico das expressões W, X e Y para todas as combinações possíveis de valores.
+
+\subsection{Tautologia}
+
+A proposição W ($P \lor \neg P$) é sempre verdadeira, independentemente do valor de $P$, sendo classificada como \textbf{tautologia}.
+
+\begin{table}[h]
+\centering
+\[
+\begin{array}{c|c|c|c|c|c}
+P & \neg P & P \lor \neg P \\
+\hline
+V & F & V \\
+F & V & V \\
+\end{array}
+\]
+\caption{Tabela verdade da expressão $P \lor \neg P$}
+\end{table}
+
+\subsection{Contradição}
+
+A proposição X ($(P \land \neg P)$) é sempre falsa, pois não é possível que $P$ e sua negação sejam verdadeiros simultaneamente, caracterizando uma \textbf{contradição}.
+
+\begin{table}[h]
+\centering
+\[
+\begin{array}{c|c|c|c|c|c}
+P & \neg P & P \land \neg P \\
+\hline
+V & F & F \\
+F & V & F \\
+\end{array}
+\]
+\caption{Tabela verdade da expressão $P \land \neg P$}
+\end{table}
+
+\subsection{Contingência}
+
+A proposição Y ($(P \lor Q) \land (\neg Q \lor R)$) apresenta valores verdadeiros e falsos dependendo das combinações de $P$, $Q$ e $R$, sendo portanto uma \textbf{contingência}. Essa classificação evidencia que seu valor lógico não é fixo, dependendo diretamente das variáveis envolvidas.
+
+\begin{table}[h]
+\centering
+\[
+\begin{array}{c|c|c|c|c|c|c}
+P & Q & R & P \lor Q & \neg Q & \neg Q \lor R & (P \lor Q) \land (\neg Q \lor R) \\
+\hline
+V & V & V & V & F & V & V \\
+V & V & F & V & F & F & F \\
+V & F & V & V & V & V & V \\
+V & F & F & V & V & V & V \\
+F & V & V & V & F & V & V \\
+F & V & F & V & F & F & F \\
+F & F & V & F & V & V & F \\
+F & F & F & F & V & V & F \\
+\end{array}
+\]
+\caption{Tabela verdade da expressão $(P \lor Q) \land (\neg Q \lor R)$}
+\end{table}
+
+\end{document}
